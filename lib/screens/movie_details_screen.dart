@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/home_items/custom_item.dart';
 import 'package:movie_app/theme/app_color.dart';
 
 class MovieDetailsScreen extends StatelessWidget {
@@ -11,12 +12,12 @@ class MovieDetailsScreen extends StatelessWidget {
       children: [
         Container(
           height: MediaQuery.of(context).size.height * 0.3,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage('assets/images/Image.png'),
                 fit: BoxFit.cover),
           ),
-          child: Center(
+          child: const Center(
               child: ImageIcon(
             AssetImage('assets/images/play-button-2.png'),
             color: Colors.white,
@@ -24,152 +25,123 @@ class MovieDetailsScreen extends StatelessWidget {
           )),
         ),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          height: MediaQuery.of(context).size.height * 0.3,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Spacer(),
-              Text(
-                'Dora and the lost city of gold',
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              Spacer(),
-              Text(
-                '2019  PG-13  2h 7m',
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-              Spacer(),
-              Row(
-                children: [
-                  Stack(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          height: MediaQuery.of(context).size.height * 0.4,
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+            const Spacer(),
+            Text(
+              'Dora and the lost city of gold',
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+            const Spacer(),
+            Text(
+              '2019  PG-13  2h 7m',
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
+            const Spacer(),
+            Row(
+              children: [
+                CustomScreen(),
+                const Spacer(),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.30,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ClipRRect(
-                        child: Image.asset(
-                          'assets/images/Image.png',
-                          width: MediaQuery.of(context).size.width * 0.3,
-                          height: MediaQuery.of(context).size.height * 0.22,
-                          fit: BoxFit.cover,
-                        ),
-                        borderRadius: BorderRadius.circular(4),
+                      Spacer(),
+                      Row(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.14,
+                            height: 25,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                border: Border.all(
+                                  color: AppColor.grayColor,
+                                )),
+                            child: Center(
+                              child: Text(
+                                'Action',
+                                style: Theme.of(context).textTheme.titleSmall,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.14,
+                            height: 25,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                border: Border.all(
+                                  color: AppColor.grayColor,
+                                )),
+                            child: Center(
+                              child: Text(
+                                'Action',
+                                style: Theme.of(context).textTheme.titleSmall,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.14,
+                            height: 25,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                border: Border.all(
+                                  color: AppColor.grayColor,
+                                )),
+                            child: Center(
+                              child: Text(
+                                'Action',
+                                style: Theme.of(context).textTheme.titleSmall,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      Positioned(
-                        child: ImageIcon(
-                          AssetImage('assets/images/bookmark.png'),
-                          color: Color(0xFF514F4F),
-                          size: 40,
+                      const Spacer(
+                        flex: 1,
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.58,
+                        child: Text(
+                          'Having spent most of her life exploring the jungle, nothing could prepare Dora for her most dangerous adventure yet — high school.',
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ),
-                      Positioned(
-                        top: 10,
-                        left: 12,
-                        child: Icon(
-                          Icons.add,
-                          color: Colors.white,
-                          size: 17,
-                        ),
-                      )
+                      const Spacer(
+                        flex: 2,
+                      ),
+                      Row(
+                        children: [
+                          const ImageIcon(
+                            AssetImage('assets/images/star-2.png'),
+                            size: 20,
+                            color: AppColor.yellowColor,
+                          ),
+                          Text(
+                            '7.7',
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                        ],
+                      ),
+                      const Spacer(
+                        flex: 3,
+                      ),
                     ],
                   ),
-                  Spacer(),
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.22,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.14,
-                              height: 25,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4),
-                                  border: Border.all(
-                                    color: AppColor.grayColor,
-                                  )),
-                              child: Center(
-                                child: Text(
-                                  'Action',
-                                  style: Theme.of(context).textTheme.titleSmall,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.14,
-                              height: 25,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4),
-                                  border: Border.all(
-                                    color: AppColor.grayColor,
-                                  )),
-                              child: Center(
-                                child: Text(
-                                  'Action',
-                                  style: Theme.of(context).textTheme.titleSmall,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.14,
-                              height: 25,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4),
-                                  border: Border.all(
-                                    color: AppColor.grayColor,
-                                  )),
-                              child: Center(
-                                child: Text(
-                                  'Action',
-                                  style: Theme.of(context).textTheme.titleSmall,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Spacer(
-                          flex: 1,
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.58,
-                          child: Text(
-                            'Having spent most of her life exploring the jungle, nothing could prepare Dora for her most dangerous adventure yet — high school.',
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                        ),
-                        Spacer(
-                          flex: 2,
-                        ),
-                        Row(
-                          children: [
-                            ImageIcon(
-                              AssetImage('assets/images/star-2.png'),
-                              size: 20,
-                              color: AppColor.yellowColor,
-                            ),
-                            Text(
-                              '7.7',
-                              style: Theme.of(context).textTheme.bodyLarge,
-                            ),
-                          ],
-                        ),
-                        Spacer(
-                          flex: 3,
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-              Spacer()
-            ],
-          ),
-        )
+                ),
+              ]),
+              ],
+            ),
+
+        ),
       ],
     );
   }
