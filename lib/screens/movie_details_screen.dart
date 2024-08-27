@@ -42,7 +42,7 @@ class MovieDetailsScreen extends StatelessWidget {
             const Spacer(),
             Row(
               children: [
-                CustomScreen(),
+                const CustomScreen(),
                 const Spacer(),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.30,
