@@ -25,7 +25,7 @@ class WatchListScreen extends StatelessWidget {
           Expanded(
             child: ListView.separated(
               separatorBuilder: (context, index) {
-                return Divider(
+                return const  Divider(
                   height: 35,
                   color: AppColor.grayColor,
                 );

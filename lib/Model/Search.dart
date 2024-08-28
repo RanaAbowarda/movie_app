@@ -1,3 +1,5 @@
+import 'PopularMovies.dart';
+
 /// page : 1
 /// results : []
 /// total_pages : 1
@@ -15,14 +17,14 @@ class Search {
     if (json['results'] != null) {
       results = [];
       json['results'].forEach((v) {
-        results?.add(Dynamic.fromJson(v));
+        results?.add(Results.fromJson(v));
       });
     }
     totalPages = json['total_pages'];
     totalResults = json['total_results'];
   }
   int? page;
-  List<dynamic>? results;
+  List<Results>? results;
   int? totalPages;
   int? totalResults;
 
