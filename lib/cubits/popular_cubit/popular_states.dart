@@ -1,10 +1,10 @@
 abstract class PopularStates {}
 
-class PopularLoadingStat extends PopularStates {}
+class PopularLoadingState extends PopularStates {}
 
-class PopularErrorStat extends PopularStates {
+class PopularErrorState extends PopularStates {
   String errorMessage;
-  PopularErrorStat({required this.errorMessage});
+  PopularErrorState({required this.errorMessage});
 }
 
-class PopularSuccessStat extends PopularStates {}
+class PopularSuccessState extends PopularStates {}

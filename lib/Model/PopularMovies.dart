@@ -4,13 +4,13 @@ class PopularMovies {
       this.results,
       this.totalPages,
       this.totalResults,
-      this.message,
-      this.code});
+      this.statusMessage,
+      this.success});
 
   PopularMovies.fromJson(dynamic json) {
     page = json['page'];
-    code = json['code'];
-    message = json['message'];
+    success = json['success'];
+    statusMessage = json['status_message'];
     if (json['results'] != null) {
       results = [];
       json['results'].forEach((v) {
@@ -22,8 +22,8 @@ class PopularMovies {
   }
   int? page;
   List<Results>? results;
-  String? code;
-  String? message;
+  bool? success;
+  String? statusMessage;
   int? totalPages;
   int? totalResults;
 
