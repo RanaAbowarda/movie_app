@@ -5,6 +5,7 @@ import 'package:movie_app/cubits/popular_cubit/popular_states.dart';
 import 'package:movie_app/cubits/popular_cubit/popular_view_model.dart';
 import 'package:movie_app/theme/app_color.dart';
 
+// ignore: must_be_immutable
 class PopularItem extends StatelessWidget {
   PopularItem({
     super.key,
