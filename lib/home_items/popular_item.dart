@@ -21,7 +21,7 @@ class PopularItem extends StatelessWidget {
           // bloc: PopularViewModel()..getPopular(),
           builder: (context, state) {
         if (state is PopularLoadingState) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(
               color: AppColor.darkYellowColor,
             ),
@@ -37,45 +37,51 @@ class PopularItem extends StatelessWidget {
         }
         if (state is PopularSuccessState) {
           return CarouselSlider.builder(
-            itemCount: 8,
+            itemCount:
+                BlocProvider.of<PopularViewModel>(context).resultList.length,
             itemBuilder:
-                (BuildContext context, int itemIndex, int pageViewIndex) =>
-                    Stack(
-              children: [
-                Container(
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                      image: DecorationImage(
-                          // fit: BoxFit.fill,
-                          image: AssetImage("assets/images/background.png"))),
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 30.0, left: 148),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Text(
-                          BlocProvider.of<PopularViewModel>(context)
-                              .resultList[1]
-                              .backdropPath!,
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        Text(
-                          "2019  PG-13  2h 7m",
-                          style: Theme.of(context).textTheme.titleSmall,
-                        ),
-                      ],
+                (BuildContext context, int itemIndex, int pageViewIndex) {
+              final item = BlocProvider.of<PopularViewModel>(context)
+                  .resultList[itemIndex];
+              return Stack(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            // fit: BoxFit.fill,
+                            image: NetworkImage(
+                      item.backdropPath!,
+                    ))),
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 30.0, left: 148),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            item.originalTitle!,
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                          Text(
+                            BlocProvider.of<PopularViewModel>(context)
+                                .resultList[1]
+                                .releaseDate!,
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Positioned(
-                  top: 150,
-                  child: Image.asset(
-                    "assets/images/Image.png",
+                  Positioned(
+                    top: 150,
+                    child: Image.asset(
+                      item.posterPath!,
+                    ),
                   ),
-                ),
-              ],
-            ),
+                ],
+              );
+            },
             options: CarouselOptions(
               height: 350,
               aspectRatio: 16 / 9,
