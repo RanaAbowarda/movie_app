@@ -7,6 +7,13 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.red,
+      child: Center(
+        child: ElevatedButton(
+            onPressed: () {
+              // PopularViewModel().getPopular();
+            },
+            child: Text('test')),
+      ),
     );
   }
 }
