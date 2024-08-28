@@ -20,12 +20,12 @@ class BrowseScreen extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyLarge,
             textAlign: TextAlign.left,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Expanded(
               child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 40,
               mainAxisSpacing: 40,
@@ -35,7 +35,7 @@ class BrowseScreen extends StatelessWidget {
               return Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4),
-                  image: DecorationImage(
+                  image:const DecorationImage(
                     image: AssetImage(
                       'assets/images/0e34a5e080e8c915030603ddcdb4eeba.png',
                     ),
