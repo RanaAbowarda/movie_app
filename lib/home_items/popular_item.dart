@@ -25,7 +25,7 @@ class PopularItem extends StatelessWidget {
           builder: (context, state) {
         var resultList = BlocProvider.of<PopularViewModel>(context).resultList;
         if (state is PopularLoadingState) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(
               color: AppColor.darkYellowColor,
             ),
@@ -41,67 +41,15 @@ class PopularItem extends StatelessWidget {
         }
         if (state is PopularSuccessState) {
           return CarouselSlider.builder(
-            itemCount: 8,
+            itemCount:
+                BlocProvider.of<PopularViewModel>(context).resultList.length,
             itemBuilder:
-                (BuildContext context, int itemIndex, int pageViewIndex) =>
-                    Stack(
-              children: [
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          // fit: BoxFit.fill,
-                          image: NetworkImage(
-                              "https://image.tmdb.org/t/p/w500${resultList[itemIndex].backdropPath}"))),
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        bottom: height * 0.01, left: width * 0.45),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Text(
-                          resultList[itemIndex].title!,
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          resultList[itemIndex].releaseDate!,
-                          style: Theme.of(context).textTheme.titleSmall,
-                        ),
-                      ],
+
                     ),
                   ),
-                ),
-                Positioned(
-                  top: 150,
-                  left: 20,
-                  child: Container(
-                    width: width * 0.35,
-                    height: height * 0.25,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            "https://image.tmdb.org/t/p/w500${resultList[itemIndex].posterPath}",
-                          ),
-                          fit: BoxFit.cover,
-                        )),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Image.asset(
-                          'assets/images/bookmark.png',
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+                ],
+              );
+            },
             options: CarouselOptions(
               height: 350,
               aspectRatio: 16 / 9,

@@ -1,18 +1,15 @@
 import 'PopularMovies.dart';
 
-/// page : 1
-/// results : []
-/// total_pages : 1
-/// total_results : 0
-
 class Search {
   Search({
       this.page, 
       this.results, 
-      this.totalPages, 
-      this.totalResults,});
+      this.totalPages,
+      this.totalResults,
+      this.statusMessage});
 
   Search.fromJson(dynamic json) {
+    statusMessage = json['statusMessage'];
     page = json['page'];
     if (json['results'] != null) {
       results = [];
@@ -27,6 +24,7 @@ class Search {
   List<Results>? results;
   int? totalPages;
   int? totalResults;
+  String? statusMessage;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
