@@ -34,5 +34,7 @@ curl --request GET \
   static const String popularEndPoint = '/3/movie/popular';
   static const String recommendedEndPoint = '/3/movie/top_rated';
   static const String newReleasedEndPoint = '/3/movie/upcoming';
+devlopment
   static const String searchEndPoint = '//3/search/movie';
+master
 }
