@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/theme/app_color.dart';
 
 class ItemOfWatchList extends StatelessWidget {
   const ItemOfWatchList({
@@ -36,24 +35,8 @@ class ItemOfWatchList extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Stack(
-                  children: [
-                    Image.asset(
-                      'assets/images/Icon awesome-bookmark.png',
-                      color: AppColor.yellowColor,
-                    ),
-                    Positioned(
-                      top: 10,
-                      left: 10,
-                      child: ImageIcon(
-                        AssetImage(
-                          'assets/images/Icon awesome-check.png',
-                        ),
-                        color: Colors.white,
-                        size: 11,
-                      ),
-                    )
-                  ],
+                Image.asset(
+                  'assets/images/bookmark.png',
                 )
               ],
             ),

@@ -35,4 +35,5 @@ curl --request GET \
   static const String recommendedEndPoint = '/3/search/movie';
   static const String newReleasedEndPoint = '/3/movie/upcoming';
   static const String searchEndPoint = '/3/movie/top_rated';
+  static const String browsEndPoint = '/3/genre/movie/list';
 }
