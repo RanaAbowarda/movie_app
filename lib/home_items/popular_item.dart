@@ -23,7 +23,6 @@ class PopularItem extends StatelessWidget {
 
           // bloc: PopularViewModel()..getPopular(),
           builder: (context, state) {
-        var resultList = BlocProvider.of<PopularViewModel>(context).resultList;
         if (state is PopularLoadingState) {
           return const Center(
             child: CircularProgressIndicator(
@@ -31,20 +30,65 @@ class PopularItem extends StatelessWidget {
             ),
           );
         }
-        if (state is PopularErrorState) {
-          return Column(
-            children: [
-              Text(state.errorMessage),
-              ElevatedButton(onPressed: () {}, child: Text('try again'))
-            ],
-          );
-        }
         if (state is PopularSuccessState) {
           return CarouselSlider.builder(
-            itemCount:
-                BlocProvider.of<PopularViewModel>(context).resultList.length,
+            itemCount: popularViewModel.resultList.length,
             itemBuilder:
-
+                (BuildContext context, int itemIndex, int pageViewIndex) {
+              var resultList = BlocProvider.of<PopularViewModel>(context)
+                  .resultList[itemIndex];
+              return Stack(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                "https://image.tmdb.org/t/p/w500${resultList.backdropPath}"))),
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          bottom: height * 0.01, left: width * 0.45),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            resultList.originalTitle!,
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            resultList.releaseDate!,
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 150,
+                    left: 20,
+                    child: Container(
+                      width: width * 0.35,
+                      height: height * 0.5,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          image: DecorationImage(
+                            image: NetworkImage(
+                              "https://image.tmdb.org/t/p/w500${resultList.posterPath}",
+                            ),
+                            fit: BoxFit.cover,
+                          )),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Image.network(
+                              "https://image.tmdb.org/t/p/w500${resultList.posterPath}"),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -64,6 +108,7 @@ class PopularItem extends StatelessWidget {
               enlargeStrategy: CenterPageEnlargeStrategy.zoom,
               enlargeCenterPage: true,
               enlargeFactor: 0.20,
+              onPageChanged: (index, reason) {},
               scrollDirection: Axis.horizontal,
             ),
           );
