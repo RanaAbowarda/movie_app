@@ -1,14 +1,14 @@
 import 'PopularMovies.dart';
 
-class SimilarMovie {
-  SimilarMovie({
-      this.page, 
-      this.results, 
+class Recommended {
+  Recommended(
+      {this.page,
+      this.results,
       this.totalPages,
       this.totalResults,
       this.statusMessage});
 
-  SimilarMovie.fromJson(dynamic json) {
+  Recommended.fromJson(dynamic json) {
     page = json['page'];
     statusMessage = json['statusMessage'];
     if (json['results'] != null) {
@@ -20,11 +20,12 @@ class SimilarMovie {
     totalPages = json['total_pages'];
     totalResults = json['total_results'];
   }
+
   int? page;
   List<Results>? results;
+  String? statusMessage;
   int? totalPages;
   int? totalResults;
-  String? statusMessage;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -36,7 +37,4 @@ class SimilarMovie {
     map['total_results'] = totalResults;
     return map;
   }
-
 }
-
-

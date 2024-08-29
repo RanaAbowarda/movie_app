@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:movie_app/Model/PopularMovies.dart';
@@ -21,8 +22,7 @@ class PopularViewModel extends Cubit<PopularStates> {
         // print(data);
         popularMovies = PopularMovies.fromJson(json);
         resultList = popularMovies!.results!;
-        print(
-            '======================================== ${resultList[2].backdropPath}');
+
         emit(PopularSuccessState());
       } else {
         emit(PopularErrorState(errorMessage: popularMovies!.statusMessage!));
