@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
 class CustomScreen extends StatelessWidget {
-  const CustomScreen({super.key});
+  CustomScreen({super.key, required this.image});
 
+  String image;
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(4),
-          child: Image.asset(
-            'assets/images/Image.png',
+          child: Image.network(
+            image,
             width: MediaQuery.of(context).size.width * 0.3,
             height: MediaQuery.of(context).size.height * 0.28,
             fit: BoxFit.cover,

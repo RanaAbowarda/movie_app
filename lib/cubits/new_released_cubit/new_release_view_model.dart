@@ -10,7 +10,7 @@ import 'package:movie_app/cubits/new_released_cubit/new_release_states.dart';
 class NewReleasedViewModel extends Cubit<NewReleasedState> {
   NewReleasedViewModel() : super(NewReleasedLoadingState());
   NewReleases? newReleases;
-  List<Results> resultList = [];
+  List<Results> newResultList = [];
 
   void getNewReleased() async {
     try {
@@ -24,7 +24,7 @@ class NewReleasedViewModel extends Cubit<NewReleasedState> {
         var json = jsonDecode(data);
         // print(data);
         newReleases = NewReleases.fromJson(json);
-        resultList = newReleases!.results!;
+        newResultList = newReleases!.results!;
 
         emit(NewReleasedSuccessState());
       } else {

@@ -10,9 +10,9 @@ import 'package:movie_app/cubits/recommended_cubit/recommended_states.dart';
 class RecommendedViewModel extends Cubit<RecommendedState> {
   RecommendedViewModel() : super(RecommendedLoadingState());
   Recommended? recommended;
-  List<Results> resultList = [];
+  List<Results> recommendList = [];
 
-  void getRecommended() async {
+  Future<void> getRecommended() async {
     try {
       emit(RecommendedLoadingState());
       Uri url =
@@ -24,7 +24,7 @@ class RecommendedViewModel extends Cubit<RecommendedState> {
         var json = jsonDecode(data);
         // print(data);
         recommended = Recommended.fromJson(json);
-        resultList = recommended!.results!;
+        recommendList = recommended!.results!;
 
         emit(RecommendedSuccessState());
       } else {
