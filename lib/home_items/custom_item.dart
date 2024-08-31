@@ -1,39 +1,33 @@
 import 'package:flutter/material.dart';
 
 class CustomScreen extends StatelessWidget {
-  CustomScreen({super.key, required this.image});
-
+  CustomScreen(
+      {super.key, required this.image, this.heightMeasure, this.widthMeasure});
+  double? widthMeasure;
+  double? heightMeasure;
   String image;
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        ClipRRect(
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    return Container(
+      width: widthMeasure ?? width * 0.25,
+      // width * 0.25,
+      height: heightMeasure ?? height * 0.15,
+      //  height * 0.15,
+      decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
-          child: Image.network(
-            image,
-            width: MediaQuery.of(context).size.width * 0.3,
-            height: MediaQuery.of(context).size.height * 0.28,
-            fit: BoxFit.cover,
-          ),
-        ),
-        const Positioned(
-          child: ImageIcon(
+          image:
+              DecorationImage(image: NetworkImage(image), fit: BoxFit.cover)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          ImageIcon(
             AssetImage('assets/images/bookmark.png'),
-            color: Color(0xFF514F4F),
-            size: 40,
           ),
-        ),
-        const Positioned(
-          top: 10,
-          left: 12,
-          child: Icon(
-            Icons.add,
-            color: Colors.white,
-            size: 17,
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
