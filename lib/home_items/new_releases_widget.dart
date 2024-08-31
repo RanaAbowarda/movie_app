@@ -13,6 +13,8 @@ class NewReleasesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return BlocProvider(
       create: (context) => NewReleasedViewModel()..getNewReleased(),
       child: BlocBuilder<NewReleasedViewModel, NewReleasedState>(
@@ -39,19 +41,22 @@ class NewReleasesWidget extends StatelessWidget {
         }
         if (state is NewReleasedSuccessState) {
           return Container(
-            height: 127,
-            padding: EdgeInsets.all(10),
+            height: height * 0.22,
+            padding: EdgeInsets.only(left: 10, bottom: 10, top: 10),
             color: AppColor.secondaryColor,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      "New Releases",
-                      style: Theme.of(context).textTheme.titleLarge,
-                    )),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Text(
+                    "New Releases",
+                    style: Theme.of(context).textTheme.titleLarge,
+                    textAlign: TextAlign.start,
+                  ),
+                ),
                 SizedBox(
-                  height: 170,
+                  height: height * 0.16,
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: BlocProvider.of<NewReleasedViewModel>(context)
@@ -62,7 +67,7 @@ class NewReleasesWidget extends StatelessWidget {
                             BlocProvider.of<NewReleasedViewModel>(context)
                                 .newResultList[index];
                         return Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.only(right: 10),
                           child: CustomScreen(
                             image:
                                 "https://image.tmdb.org/t/p/w500/${item.posterPath!}",

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/cubits/popular_cubit/popular_view_model.dart';
+import 'package:movie_app/cubits/details_cubit/details_view_model.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -11,7 +11,7 @@ class SearchScreen extends StatelessWidget {
       child: Center(
         child: ElevatedButton(
             onPressed: () {
-              PopularViewModel().getPopular();
+              DetailsViewModel().getMovieDetails('533535');
             },
             child: Text('test')),
       ),
