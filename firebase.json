@@ -1,0 +1,22 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "movie-app-9e9a9",
+          "appId": "1:445168332234:android:b29266fd976adeb44f7333",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "movie-app-9e9a9",
+          "configurations": {
+            "android": "1:445168332234:android:b29266fd976adeb44f7333",
+            "ios": "1:445168332234:ios:63028961a6ecba094f7333"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter/widgets.dart';
-import 'package:movie_app/home_items/new_releases_widget.dart';
-import 'package:movie_app/home_items/recommended_widget.dart';
 
-import '../home_items/popular_item.dart';
+import '../home_widget/new_releases_widget.dart';
+import '../home_widget/popular_widget.dart';
+import '../home_widget/recommended_widget.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
@@ -15,7 +14,7 @@ class HomeTab extends StatelessWidget {
     return Column(children: [
       PopularItem(),
       NewReleasesWidget(),
-      SizedBox(
+      const SizedBox(
         height: 20,
       ),
       RecommendedWidget()

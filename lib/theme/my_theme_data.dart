@@ -4,6 +4,8 @@ import 'package:movie_app/theme/app_color.dart';
 
 class MyThemeData {
   static final ThemeData darkTheme = ThemeData(
+      appBarTheme:
+          AppBarTheme(iconTheme: IconThemeData(color: AppColor.yellowColor)),
       scaffoldBackgroundColor: AppColor.primaryColor,
       bottomNavigationBarTheme:const BottomNavigationBarThemeData(
         backgroundColor: AppColor.blackColor,
@@ -30,9 +32,9 @@ class MyThemeData {
             fontSize: 18,
             fontWeight: FontWeight.w400,
             color: AppColor.whiteColor),
-        bodyMedium: GoogleFonts.inter(
-            fontSize: 13,
-            fontWeight: FontWeight.w400,
+        bodyMedium: GoogleFonts.poppins(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
             color: AppColor.lightGrayColor),
         bodySmall: GoogleFonts.inter(
             fontSize: 8,

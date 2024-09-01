@@ -24,7 +24,7 @@ class PopularItem extends StatelessWidget {
           builder: (context, state) {
         var resultList = BlocProvider.of<PopularViewModel>(context).resultList;
         if (state is PopularLoadingState) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(
               color: AppColor.darkYellowColor,
             ),
@@ -34,13 +34,18 @@ class PopularItem extends StatelessWidget {
           return Column(
             children: [
               Text(state.errorMessage),
-              ElevatedButton(onPressed: () {}, child: Text('try again'))
+              ElevatedButton(
+                  onPressed: () {
+                    BlocProvider.of<PopularViewModel>(context).getPopular();
+                  },
+                  child: Text('try again',
+                      style: Theme.of(context).textTheme.headlineMedium))
             ],
           );
         }
         if (state is PopularSuccessState) {
           return CarouselSlider.builder(
-            itemCount: 8,
+            itemCount: resultList.length,
             itemBuilder:
                 (BuildContext context, int itemIndex, int pageViewIndex) =>
                     InkWell(
@@ -80,7 +85,7 @@ class PopularItem extends StatelessWidget {
                                 resultList[itemIndex].title!,
                                 style: Theme.of(context).textTheme.titleMedium,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 5,
                               ),
                               Text(
