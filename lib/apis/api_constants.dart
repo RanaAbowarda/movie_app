@@ -23,6 +23,9 @@ curl --request GET \
      --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ZDA3ZWI0NDJlMzhmMzcwNGU4NWQ4OGUzYTg4ZTk0ZCIsIm5iZiI6MTcyNDY4MTU2Mi43MDgyNTgsInN1YiI6IjY2Y2M4NzcyYmI0Yzk2YTdjZjBkNTk5MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.0hKZWf4kVTPvPMGxfwTv53QMQ8TN0f3Kuw4gtOiauPo' \
      --header 'accept: application/json'
   */
+  /*
+  https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc
+   */
   static const Map<String, String> headers = {
     'Authorization': authorization,
     'accept': 'application/json',
@@ -34,6 +37,6 @@ curl --request GET \
   static const String popularEndPoint = '/3/movie/popular';
   static const String recommendedEndPoint = '/3/movie/top_rated';
   static const String newReleasedEndPoint = '/3/movie/upcoming';
-  static const String browsEndPoint = '/3/genre/movie/list';
-  static const String searchEndPoint = '//3/search/movie';
+  static const String searchEndPoint = '/3/search/movie';
+  static const String browsEndPoint = '/3/discover/movie';
 }

@@ -1,47 +1,48 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_app/cubits/recommended_cubit/recommended_states.dart';
-import 'package:movie_app/cubits/recommended_cubit/recommended_view_model.dart';
-import 'package:movie_app/theme/app_color.dart';
 
-import 'custom_item.dart';
+import '../Model/PopularMovies.dart';
+import '../cubits/more_like_cubit/more_like_states.dart';
+import '../cubits/more_like_cubit/more_like_view_model.dart';
+import '../items/custom_widget.dart';
+import '../theme/app_color.dart';
 
-class RecommendedWidget extends StatelessWidget {
-  RecommendedWidget({super.key});
-
-  RecommendedViewModel recommendedViewModel = RecommendedViewModel();
+class SimilarWidget extends StatelessWidget {
+  const SimilarWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    var idModel = ModalRoute.of(context)!.settings.arguments as Results;
     return BlocProvider(
-      create: (context) => RecommendedViewModel()..getRecommended(),
-      child: BlocBuilder<RecommendedViewModel, RecommendedState>(
+      create: (context) => MoreLikeViewModel()..getMoreLike("${idModel.id}"),
+      child: BlocBuilder<MoreLikeViewModel, MoreLikeStates>(
           builder: (context, state) {
-        if (state is RecommendedLoadingState) {
+        final similarResults =
+            BlocProvider.of<MoreLikeViewModel>(context).similarResultsList;
+        if (state is MoreLikeLoadingState) {
           return const Center(
             child: CircularProgressIndicator(
               color: AppColor.darkYellowColor,
             ),
           );
         }
-        if (state is RecommendedErrorState) {
+        if (state is MoreLikeErrorState) {
           return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Text("Some Thing Went Wrong!!"),
+              Text(state.errorMessage),
               ElevatedButton(
-                onPressed: () {},
-                child: const Text("Try Again"),
-              )
+                  onPressed: () {
+                    BlocProvider.of<MoreLikeViewModel>(context)
+                        .getMoreLike("${idModel.id}");
+                  },
+                  child: Text('Try Again',
+                      style: Theme.of(context).textTheme.headlineMedium))
             ],
           );
         }
-        if (state is RecommendedSuccessState) {
+        if (state is MoreLikeSuccessState) {
           return Container(
             height: height * 0.27,
             padding: const EdgeInsets.only(top: 10),
@@ -52,7 +53,7 @@ class RecommendedWidget extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 5, left: 10),
                   child: Text(
-                    "Recommend",
+                    "More Like This",
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
@@ -62,40 +63,36 @@ class RecommendedWidget extends StatelessWidget {
                     height: height * 0.22,
                     child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount:
-                            BlocProvider.of<RecommendedViewModel>(context)
-                                .recommendList
-                                .length,
+                        itemCount: similarResults.length,
                         itemBuilder: (context, index) {
-                          final item =
-                              BlocProvider.of<RecommendedViewModel>(context)
-                                  .recommendList[index];
                           return Padding(
                             padding: const EdgeInsets.only(right: 10),
                             child: Card(
                               surfaceTintColor: AppColor.darkGrayColor,
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4)),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
                               elevation: 0.1,
-                              color: Color(0xFF343534),
-                              shadowColor: Colors.black,
+                              color: AppColor.secondaryBlackColor,
+                              shadowColor: AppColor.blackColor,
                               child: SizedBox(
                                 height: height * 0.2,
                                 width: width * 0.25,
                                 child: Column(
                                   children: [
                                     CustomScreen(
+                                        results: similarResults[index],
                                         image:
-                                            "https://image.tmdb.org/t/p/w500/${item.posterPath!}",
+                                            "https://image.tmdb.org/t/p/w500${similarResults[index].posterPath}",
                                         heightMeasure: height * 0.15,
                                         widthMeasure: width * 0.25),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 5,
                                     ),
                                     SizedBox(
                                       height: height * 0.05,
                                       child: Padding(
-                                        padding: EdgeInsets.only(left: 5),
+                                        padding: const EdgeInsets.only(left: 5),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -107,27 +104,39 @@ class RecommendedWidget extends StatelessWidget {
                                                   color: AppColor.yellowColor,
                                                   size: 12,
                                                 ),
-                                                SizedBox(
+                                                const SizedBox(
                                                   width: 5,
                                                 ),
                                                 Text(
-                                                  "${item.voteAverage!},",
+                                                  similarResults[index]
+                                                      .voteAverage
+                                                      .toString()
+                                                      .substring(0, 3),
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .headlineSmall,
                                                 ),
                                               ],
                                             ),
-                                            Spacer(),
+                                            const Spacer(),
                                             Text(
-                                              item.title!.substring(0, 10),
+                                              similarResults[index]
+                                                          .originalTitle!
+                                                          .length >
+                                                      8
+                                                  ? similarResults[index]
+                                                      .originalTitle!
+                                                      .substring(0, 8)
+                                                  : similarResults[index]
+                                                      .originalTitle!,
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .headlineSmall,
                                             ),
-                                            Spacer(),
+                                            const Spacer(),
                                             Text(
-                                              item.releaseDate!,
+                                              similarResults[index]
+                                                  .releaseDate!,
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .bodySmall,

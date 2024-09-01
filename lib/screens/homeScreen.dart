@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/Model/genre_model.dart';
 import 'package:movie_app/home_tabs/browse_screen.dart';
 import 'package:movie_app/home_tabs/home_tab.dart';
 import 'package:movie_app/home_tabs/search_screen.dart';
 import 'package:movie_app/home_tabs/watch_list_screen.dart';
+import 'package:movie_app/home_widget/browse_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -51,10 +53,25 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  List<Widget> tabs = [
+  GenreModel? genreModel;
+
+  void onItemClick(genreModel) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => BrowseWidget(id: genreModel.id),
+      ),
+    );
+    setState(() {});
+  }
+
+  List<Widget> get tabs =>
+      [
     const HomeTab(),
     const SearchScreen(),
-    const BrowseScreen(),
-    const WatchListScreen(),
+        genreModel == null
+            ? BrowseScreen(onItemClick: onItemClick)
+            : BrowseWidget(id: genreModel!.id!),
+        const WatchListScreen(),
   ];
 }

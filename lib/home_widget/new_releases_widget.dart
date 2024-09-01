@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../cubits/new_released_cubit/new_release_states.dart';
 import '../cubits/new_released_cubit/new_release_view_model.dart';
+import '../items/custom_widget.dart';
 import '../theme/app_color.dart';
-import 'custom_item.dart';
 
 class NewReleasesWidget extends StatelessWidget {
   NewReleasesWidget({super.key});
@@ -31,10 +31,14 @@ class NewReleasesWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Text("Some Thing Went Wrong!!"),
+              Text(
+                "Some Thing Went Wrong!!",
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
               ElevatedButton(
                 onPressed: () {},
-                child: const Text("Try Again"),
+                child: Text("Try Again",
+                    style: Theme.of(context).textTheme.headlineMedium),
               )
             ],
           );
@@ -42,7 +46,7 @@ class NewReleasesWidget extends StatelessWidget {
         if (state is NewReleasedSuccessState) {
           return Container(
             height: height * 0.22,
-            padding: EdgeInsets.only(left: 10, bottom: 10, top: 10),
+            padding: const EdgeInsets.only(left: 10, bottom: 10, top: 10),
             color: AppColor.secondaryColor,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,6 +73,7 @@ class NewReleasesWidget extends StatelessWidget {
                         return Padding(
                           padding: const EdgeInsets.only(right: 10),
                           child: CustomScreen(
+                            results: item,
                             image:
                                 "https://image.tmdb.org/t/p/w500/${item.posterPath!}",
                           ),
