@@ -57,14 +57,14 @@ class PopularItem extends StatelessWidget {
                 );
               },
               child: Container(
-                height: height * 0.32,
+                height: 300,
                 width: double.infinity,
                 child: Stack(
                   children: [
                     Column(
                       children: [
                         Container(
-                          height: height * 0.23,
+                          height: 230,
                           width: double.infinity,
                           decoration: BoxDecoration(
                             image: DecorationImage(
@@ -75,14 +75,17 @@ class PopularItem extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(
-                              top: height * 0.015, left: width * 0.45),
+                          padding: EdgeInsets.only(top: 10, left: width * 0.45),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               Text(
-                                resultList[itemIndex].title!,
+                                resultList[itemIndex].title!.length < 15
+                                    ? resultList[itemIndex].title!
+                                    : resultList[itemIndex]
+                                        .title!
+                                        .substring(0, 15),
                                 style: Theme.of(context).textTheme.titleMedium,
                               ),
                               const SizedBox(
@@ -98,11 +101,11 @@ class PopularItem extends StatelessWidget {
                       ],
                     ),
                     Positioned(
-                      top: height * 0.1,
+                      top: 120,
                       left: 20,
                       child: Container(
                         width: width * 0.35,
-                        height: height * 0.22,
+                        height: 180,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             image: DecorationImage(

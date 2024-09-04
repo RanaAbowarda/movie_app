@@ -72,7 +72,9 @@ class ItemOfWatchList extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      movie.title,
+                      movie.title.length < 13
+                          ? movie.title
+                          : movie.title.substring(0, 13),
                       style: Theme.of(context).textTheme.bodyLarge,
                       textAlign: TextAlign.left,
                     ),
@@ -82,7 +84,9 @@ class ItemOfWatchList extends StatelessWidget {
                       textAlign: TextAlign.left,
                     ),
                     Text(
-                      movie.originalTitle,
+                      movie.originalTitle.length < 15
+                          ? movie.originalTitle
+                          : movie.originalTitle.substring(0, 15),
                       style: Theme.of(context).textTheme.bodyMedium,
                       textAlign: TextAlign.left,
                     ),

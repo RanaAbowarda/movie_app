@@ -11,13 +11,15 @@ class HomeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      PopularItem(),
-      NewReleasesWidget(),
-      const SizedBox(
-        height: 20,
-      ),
-      RecommendedWidget()
-    ]);
+    return SingleChildScrollView(
+      child: Column(children: [
+        PopularItem(),
+        NewReleasesWidget(),
+        const SizedBox(
+          height: 20,
+        ),
+        RecommendedWidget()
+      ]),
+    );
   }
 }
