@@ -80,7 +80,7 @@ class SimilarWidget extends StatelessWidget {
                                 width: width * 0.25,
                                 child: Column(
                                   children: [
-                                    CustomScreen(
+                                    CustomPosterItem(
                                         results: similarResults[index],
                                         image:
                                             "https://image.tmdb.org/t/p/w500${similarResults[index].posterPath}",

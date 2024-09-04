@@ -5,8 +5,9 @@ import '../Model/firebase_function.dart';
 import '../Model/movie_model.dart';
 import '../theme/app_color.dart';
 
-class CustomScreen extends StatefulWidget {
-  CustomScreen(
+// ignore: must_be_immutable
+class CustomPosterItem extends StatefulWidget {
+  CustomPosterItem(
       {super.key,
       required this.image,
       this.heightMeasure,
@@ -21,10 +22,10 @@ class CustomScreen extends StatefulWidget {
   bool isAdd;
 
   @override
-  State<CustomScreen> createState() => _CustomScreenState();
+  State<CustomPosterItem> createState() => _CustomPosterItemState();
 }
 
-class _CustomScreenState extends State<CustomScreen> {
+class _CustomPosterItemState extends State<CustomPosterItem> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -44,8 +45,11 @@ class _CustomScreenState extends State<CustomScreen> {
         children: [
           Stack(
             children: [
-              const ImageIcon(
+              ImageIcon(
                 AssetImage('assets/images/bookmark.png'),
+                color: widget.isAdd
+                    ? AppColor.yellowColor
+                    : AppColor.darkGrayColor,
               ),
               Positioned(
                   top: 3,
@@ -53,10 +57,11 @@ class _CustomScreenState extends State<CustomScreen> {
                   child: GestureDetector(
                       onTap: () {
                         var movie = Movie(
-                            title: widget.results!.title!,
-                            originalTitle: widget.results!.originalTitle!,
-                            image: widget.image,
-                            releasedDate: widget.results!.releaseDate!);
+                          title: widget.results!.title!,
+                          originalTitle: widget.results!.originalTitle!,
+                          image: widget.image,
+                          releasedDate: widget.results!.releaseDate!,
+                        );
                         FirebaseFunction.addMovie(movie);
                         setState(() {
                           widget.isAdd = !widget.isAdd;
