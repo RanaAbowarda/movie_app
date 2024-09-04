@@ -65,13 +65,12 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
   }
 
-  List<Widget> get tabs =>
-      [
-    const HomeTab(),
-    const SearchScreen(),
+  List<Widget> get tabs => [
+        const HomeTab(),
+        SearchScreen(),
         genreModel == null
             ? BrowseScreen(onItemClick: onItemClick)
             : BrowseWidget(id: genreModel!.id!),
         const WatchListScreen(),
-  ];
+      ];
 }
