@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/cubits/recommended_cubit/recommended_states.dart';
 import 'package:movie_app/cubits/recommended_cubit/recommended_view_model.dart';
-import 'package:movie_app/screens/movie_details_screen.dart';
 import 'package:movie_app/theme/app_color.dart';
 
 import '../items/custom_widget.dart';
+import '../screens/movie_details_screen.dart';
 
 class RecommendedWidget extends StatelessWidget {
   RecommendedWidget({super.key});
@@ -47,7 +47,7 @@ class RecommendedWidget extends StatelessWidget {
         }
         if (state is RecommendedSuccessState) {
           return Container(
-            height: 280,
+            height: height * 0.27,
             padding: const EdgeInsets.only(top: 10),
             color: AppColor.secondaryColor,
             child: Column(
@@ -74,14 +74,16 @@ class RecommendedWidget extends StatelessWidget {
                           final item =
                               BlocProvider.of<RecommendedViewModel>(context)
                                   .recommendList[index];
-                          return Padding(
-                            padding: const EdgeInsets.only(right: 10),
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, MovieDetailsScreen.routeName,
-                                    arguments: item);
-                              },
+                          return InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                MovieDetailsScreen.routeName,
+                                arguments: item,
+                              );
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 10),
                               child: Card(
                                 surfaceTintColor: AppColor.darkGrayColor,
                                 shape: RoundedRectangleBorder(
@@ -94,7 +96,7 @@ class RecommendedWidget extends StatelessWidget {
                                   width: width * 0.25,
                                   child: Column(
                                     children: [
-                                      CustomPosterItem(
+                                      CustomScreen(
                                           results: item,
                                           image:
                                               "https://image.tmdb.org/t/p/w500/${item.posterPath ?? ""}",

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/cubits/browse_category_cubit/browse_category_states.dart';
 import 'package:movie_app/cubits/browse_category_cubit/browse_category_view_model.dart';
+import 'package:movie_app/items/custom_widget.dart';
 
 import '../Model/genre_model.dart';
+import '../screens/movie_details_screen.dart';
 import '../theme/app_color.dart';
 
 class BrowseWidget extends StatelessWidget {
@@ -50,86 +52,87 @@ class BrowseWidget extends StatelessWidget {
           );
         }
         if (state is BrowseCategorySuccessState) {
-          return ListView.separated(
-            itemCount: BlocProvider.of<BrowseCategoryViewModel>(context)
-                .genresList
-                .length,
-            itemBuilder: (context, index) {
-              final item = BlocProvider.of<BrowseCategoryViewModel>(context)
-                  .genresList[index];
-              return Padding(
-                padding: const EdgeInsets.only(
-                  top: 20,
-                  left: 20,
+          return Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: GridView.builder(
+                itemCount: BlocProvider.of<BrowseCategoryViewModel>(context)
+                    .genresList
+                    .length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 5,
+                  mainAxisSpacing: 5,
+                  childAspectRatio: .8,
                 ),
-                child: Column(
-                  children: [
-                    Container(
-                      height: 250,
-                      width: 250,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        image: DecorationImage(
-                          image: NetworkImage(
-                              "https://image.tmdb.org/t/p/w500/${item.posterPath!}"),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Image.asset(
-                            'assets/images/bookmark.png',
-                          )
-                        ],
-                      ),
+                itemBuilder: (context, index) {
+                  final item = BlocProvider.of<BrowseCategoryViewModel>(context)
+                      .genresList[index];
+                  return Padding(
+                    padding: const EdgeInsets.only(
+                      top: 20,
+                      left: 20,
                     ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Column(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              Icons.star,
-                              color: AppColor.yellowColor,
-                            ),
-                            Text(
-                              "${item.voteAverage!}",
-                              style: Theme.of(context).textTheme.titleMedium,
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
-                        Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            item.title!,
-                            style: Theme.of(context).textTheme.titleLarge,
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                MovieDetailsScreen.routeName,
+                                arguments: item,
+                              );
+                            },
+                            child: CustomScreen(
+                                results: item,
+                                image:
+                                    "https://image.tmdb.org/t/p/w500/${item.posterPath!}")),
+                        Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Icon(
+                                    Icons.star,
+                                    color: AppColor.yellowColor,
+                                  ),
+                                  Text(
+                                    "${item.voteAverage!}",
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
+                                    textAlign: TextAlign.center,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
+                              ),
+                              Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  item.title!,
+                                  style: Theme.of(context).textTheme.titleLarge,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  item.releaseDate!,
+                                  style: Theme.of(context).textTheme.titleLarge,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                        Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            item.releaseDate!,
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                        ),
+                        )
                       ],
-                    )
-                  ],
-                ),
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) {
-              return const Divider(
-                color: AppColor.yellowColor,
-              );
-            },
+                    ),
+                  );
+                },
+              ),
+            ),
           );
         }
         return Container();

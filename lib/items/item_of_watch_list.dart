@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:movie_app/Model/PopularMovies.dart';
 import 'package:movie_app/Model/firebase_function.dart';
 import 'package:movie_app/Model/movie_model.dart';
+import 'package:movie_app/theme/app_color.dart';
 
 class ItemOfWatchList extends StatelessWidget {
   ItemOfWatchList(
@@ -28,7 +30,7 @@ class ItemOfWatchList extends StatelessWidget {
                   borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(15),
                       bottomLeft: Radius.circular(15)),
-                  backgroundColor: const Color(0xFFFE4A49),
+                  backgroundColor: AppColor.primaryColor,
                   icon: Icons.delete,
                   label: 'Delete',
                   spacing: 8,
@@ -45,12 +47,12 @@ class ItemOfWatchList extends StatelessWidget {
             child: Row(
               children: [
                 Container(
-                  height: heightOfScreen * 0.1,
+                  height: heightOfScreen * 0.2,
                   width: widthOfScreen * 0.34,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4),
                     image: DecorationImage(
-                      image: NetworkImage(
+                      image: CachedNetworkImageProvider(
                           "https://image.tmdb.org/t/p/w500${movie.image}"),
                       fit: BoxFit.cover,
                     ),

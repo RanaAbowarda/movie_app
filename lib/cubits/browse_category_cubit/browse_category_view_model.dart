@@ -14,7 +14,7 @@ class BrowseCategoryViewModel extends Cubit<BrowseCategoryStates> {
 
   BrowseCategoryViewModel() : super(BrowseCategoryLoadingState());
 
-  void getBrowsCategory(int id) async {
+  Future<void> getBrowsCategory(int id) async {
     emit(BrowseCategoryLoadingState());
     Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.browsEndPoint,
         {"with_genres": "$id"});

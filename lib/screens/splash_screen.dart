@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/screens/log_in_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'homeScreen.dart';
 
@@ -13,8 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 5), () {
-      Navigator.pushNamedAndRemoveUntil(
-          context, HomeScreen.routeName, (route) => false);
+      checkLoginStatus();
     });
     super.initState();
   }
@@ -43,5 +44,17 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> checkLoginStatus() async {
+    final prefs = await SharedPreferences.getInstance();
+    final userId = prefs.getString('userId');
+    if (userId != null) {
+      Navigator.pushNamedAndRemoveUntil(
+          context, HomeScreen.routeName, (route) => false);
+    } else {
+      Navigator.pushNamedAndRemoveUntil(
+          context, SignInScreen.routeName, (route) => false);
+    }
   }
 }

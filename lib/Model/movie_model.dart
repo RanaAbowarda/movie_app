@@ -3,13 +3,14 @@ class Movie {
   String originalTitle;
   String image;
   String releasedDate;
+  String userId;
 
   Movie({
     required this.title,
     required this.originalTitle,
     required this.image,
     required this.releasedDate,
-  });
+      required this.userId});
 
   Map<String, dynamic> toJson() {
     return {
@@ -17,6 +18,7 @@ class Movie {
       "originalTitle": originalTitle,
       "image": image,
       "releasedDate": releasedDate,
+      "userId": userId,
     };
   }
 
@@ -26,6 +28,6 @@ class Movie {
       originalTitle: json['originalTitle'] as String,
       image: json['image'] as String,
       releasedDate: json['releasedDate'] as String,
-    );
+        userId: json["userId"] as String);
   }
 }

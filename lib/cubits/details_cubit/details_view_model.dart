@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart' as http;
 import 'package:movie_app/Model/DetailsMovie.dart';
 import 'package:movie_app/apis/api_constants.dart';
-import 'package:http/http.dart' as http;
 import 'package:movie_app/cubits/details_cubit/details_states.dart';
 
 class DetailsViewModel extends Cubit<DetailsStates> {
@@ -27,7 +27,6 @@ class DetailsViewModel extends Cubit<DetailsStates> {
       }
     } on Exception catch (e) {
       emit(DetailsErrorState(errorMessage: e.toString()));
-      // TODO
     }
   }
 }
