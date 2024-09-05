@@ -1,20 +1,20 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_app/Model/movie_model.dart';
 
 import '../Model/PopularMovies.dart';
 import '../Model/firebase_function.dart';
-import '../Model/movie_model.dart';
 import '../theme/app_color.dart';
 
-// ignore: must_be_immutable
-class CustomPosterItem extends StatefulWidget {
-  CustomPosterItem(
+class CustomScreen extends StatefulWidget {
+  CustomScreen(
       {super.key,
       required this.image,
       this.heightMeasure,
       this.widthMeasure,
       this.results,
       this.isAdd = false});
-
   Results? results;
   double? widthMeasure;
   double? heightMeasure;
@@ -22,10 +22,16 @@ class CustomPosterItem extends StatefulWidget {
   bool isAdd;
 
   @override
-  State<CustomPosterItem> createState() => _CustomPosterItemState();
+  State<CustomScreen> createState() => _CustomScreenState();
 }
 
-class _CustomPosterItemState extends State<CustomPosterItem> {
+class _CustomScreenState extends State<CustomScreen> {
+  @override
+  void initState() {
+    isMovieAdd();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -38,7 +44,8 @@ class _CustomPosterItemState extends State<CustomPosterItem> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
           image: DecorationImage(
-              image: NetworkImage(widget.image), fit: BoxFit.cover)),
+              image: CachedNetworkImageProvider(widget.image),
+              fit: BoxFit.cover)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -46,26 +53,29 @@ class _CustomPosterItemState extends State<CustomPosterItem> {
           Stack(
             children: [
               ImageIcon(
-                AssetImage('assets/images/bookmark.png'),
-                color: widget.isAdd
-                    ? AppColor.yellowColor
-                    : AppColor.darkGrayColor,
+                color: widget.isAdd ? AppColor.yellowColor : AppColor.grayColor,
+                const AssetImage(
+                  'assets/images/bookmark.png',
+                ),
               ),
               Positioned(
                   top: 3,
                   left: 5,
                   child: GestureDetector(
                       onTap: () {
-                        var movie = Movie(
-                          title: widget.results!.title!,
-                          originalTitle: widget.results!.originalTitle!,
-                          image: widget.image,
-                          releasedDate: widget.results!.releaseDate!,
-                        );
-                        FirebaseFunction.addMovie(movie);
-                        setState(() {
-                          widget.isAdd = !widget.isAdd;
-                        });
+                        if (widget.isAdd == false) {
+                          var movie = Movie(
+                              userId:
+                                  FirebaseAuth.instance.currentUser?.uid ?? "",
+                              title: widget.results!.title!,
+                              originalTitle: widget.results!.originalTitle!,
+                              image: widget.image,
+                              releasedDate: widget.results!.releaseDate!);
+                          FirebaseFunction.addMovie(movie);
+                          setState(() {
+                            widget.isAdd = !widget.isAdd;
+                          });
+                        }
                       },
                       child: Icon(
                         widget.isAdd ? Icons.done_outlined : Icons.add,
@@ -79,5 +89,12 @@ class _CustomPosterItemState extends State<CustomPosterItem> {
         ],
       ),
     );
+  }
+
+  Future<void> isMovieAdd() async {
+    bool added = await FirebaseFunction.isMovieAdd(widget.results!.title!);
+    setState(() {
+      widget.isAdd = added;
+    });
   }
 }

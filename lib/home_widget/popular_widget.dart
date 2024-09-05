@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -69,7 +70,7 @@ class PopularItem extends StatelessWidget {
                           decoration: BoxDecoration(
                             image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: NetworkImage(
+                              image: CachedNetworkImageProvider(
                                   "https://image.tmdb.org/t/p/w500${resultList[itemIndex].backdropPath}"),
                             ),
                           ),
@@ -109,7 +110,7 @@ class PopularItem extends StatelessWidget {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             image: DecorationImage(
-                              image: NetworkImage(
+                              image: CachedNetworkImageProvider(
                                 "https://image.tmdb.org/t/p/w500${resultList[itemIndex].posterPath}",
                               ),
                               fit: BoxFit.cover,

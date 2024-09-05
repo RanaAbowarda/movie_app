@@ -5,35 +5,35 @@ import 'package:movie_app/cubits/popular_cubit/popular_states.dart';
 import 'package:movie_app/cubits/popular_cubit/popular_view_model.dart';
 import 'package:movie_app/home_widget/custom_form_field.dart';
 import 'package:movie_app/items/carousal_widget.dart';
-import 'package:movie_app/screens/log_in_screen.dart';
+import 'package:movie_app/screens/sign_up_screen.dart';
 import 'package:movie_app/theme/app_color.dart';
 import 'package:provider/provider.dart';
 
-import '../cubits/auth/register_navigator.dart';
-import '../cubits/auth/register_view_model.dart';
+import '../cubits/auth/login_navigator.dart';
+import '../cubits/auth/login_view_model.dart';
+import 'homeScreen.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
-  static const routeName = 'SignUpScreen';
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
+  static const routeName = 'SignInScreen';
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<SignInScreen> createState() => _SignInScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen>
-    implements RegisterNavigator {
-  RegisterViewModel registerViewModel = RegisterViewModel();
+class _SignInScreenState extends State<SignInScreen> implements LoginNavigator {
+  LoginViewModel loginViewModel = LoginViewModel();
 
   @override
   void initState() {
     super.initState();
-    registerViewModel.navigator = this;
+    loginViewModel.loginNavigator = this;
   }
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => registerViewModel,
+      create: (context) => loginViewModel,
       child: Scaffold(
         body: SingleChildScrollView(
           child: Column(
@@ -79,28 +79,13 @@ class _SignUpScreenState extends State<SignUpScreen>
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Form(
-                  key: registerViewModel.formKey,
+                  key: loginViewModel.formKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       CustomFormField(
-                        hint: "User Name",
-                        controller: registerViewModel.userController,
-                        validator: (text) {
-                          if (text == null || text.trim().isEmpty) {
-                            return ("Please Enter User Name");
-                          }
-                          return null;
-                        },
-                        prefixIcon: const Icon(
-                          Icons.person,
-                          color: AppColor.yellowColor,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      CustomFormField(
                         hint: "Email",
-                        controller: registerViewModel.emailController,
+                        controller: loginViewModel.emailController,
                         validator: (text) {
                           if (text == null || text.trim().isEmpty) {
                             return ("Please Enter Your Email");
@@ -115,7 +100,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                         },
                         keyboardType: TextInputType.emailAddress,
                         prefixIcon: const Icon(
-                          Icons.email,
+                          Icons.person,
                           color: AppColor.yellowColor,
                         ),
                       ),
@@ -123,15 +108,11 @@ class _SignUpScreenState extends State<SignUpScreen>
                       CustomFormField(
                         obscureText: true,
                         hint: "Password",
-                        controller: registerViewModel.passwordController,
+                        controller: loginViewModel.passwordController,
                         validator: (text) {
                           if (text == null || text.trim().isEmpty) {
                             return ("Please Enter Password");
                           }
-                          if (text.length < 8) {
-                            return "Password Must be 8 Digit";
-                          }
-
                           return null;
                         },
                         prefixIcon: const Icon(
@@ -144,7 +125,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          registerViewModel.register();
+                          loginViewModel.logIn();
                         },
                         style: ElevatedButton.styleFrom(
                           shape: const StadiumBorder(),
@@ -162,14 +143,14 @@ class _SignUpScreenState extends State<SignUpScreen>
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text("Already have an account?"),
+                          const Text("Don't have an account? "),
                           TextButton(
                               onPressed: () {
                                 Navigator.pushReplacementNamed(
-                                    context, SignInScreen.routeName);
+                                    context, SignUpScreen.routeName);
                               },
                               child: const Text(
-                                "Login",
+                                "Sign Up",
                                 style: TextStyle(color: AppColor.yellowColor),
                               ))
                         ],
@@ -193,6 +174,12 @@ class _SignUpScreenState extends State<SignUpScreen>
   @override
   void showLoading(String message) {
     DialogModel.showLoading(context, message);
+  }
+
+  @override
+  void goHome() {
+    Navigator.pushNamedAndRemoveUntil(
+        context, HomeScreen.routeName, (route) => false);
   }
 
   @override

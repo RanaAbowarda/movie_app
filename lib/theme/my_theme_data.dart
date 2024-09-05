@@ -4,8 +4,10 @@ import 'package:movie_app/theme/app_color.dart';
 
 class MyThemeData {
   static final ThemeData darkTheme = ThemeData(
-      appBarTheme:
-          AppBarTheme(iconTheme: IconThemeData(color: AppColor.yellowColor)),
+      textSelectionTheme: const TextSelectionThemeData(
+        selectionHandleColor: AppColor.yellowColor,
+      ),
+      primaryColor: AppColor.primaryColor,
       scaffoldBackgroundColor: AppColor.primaryColor,
       bottomNavigationBarTheme:const BottomNavigationBarThemeData(
         backgroundColor: AppColor.blackColor,

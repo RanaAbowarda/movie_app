@@ -12,8 +12,10 @@ class SearchViewModel extends Cubit<SearchStates> {
   SearchViewModel() : super(SearchLoadingState());
   Search? search;
   List<Results> searchList = [];
+  List<Results> newSearch = [];
+  String query = '';
 
-  Future<void> getSearch(String query) async {
+  void getSearch(String query) async {
     try {
       emit(SearchLoadingState());
       Uri url = Uri.https(
