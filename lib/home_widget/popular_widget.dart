@@ -25,9 +25,12 @@ class PopularItem extends StatelessWidget {
           builder: (context, state) {
         var resultList = BlocProvider.of<PopularViewModel>(context).resultList;
         if (state is PopularLoadingState) {
-          return const Center(
-            child: CircularProgressIndicator(
-              color: AppColor.darkYellowColor,
+          return SizedBox(
+            height: height * 0.3,
+            child: const Center(
+              child: CircularProgressIndicator(
+                color: AppColor.darkYellowColor,
+              ),
             ),
           );
         }

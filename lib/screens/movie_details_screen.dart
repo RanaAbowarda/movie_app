@@ -34,9 +34,12 @@ class MovieDetailsScreen extends StatelessWidget {
                       BlocProvider.of<DetailsViewModel>(context).genresList;
 
                   if (state is DetailsLoadingState) {
-                    return const Center(
-                      child: CircularProgressIndicator(
-                        color: AppColor.darkYellowColor,
+                    return SizedBox(
+                      height: height * 0.5,
+                      child: const Center(
+                        child: CircularProgressIndicator(
+                          color: AppColor.darkYellowColor,
+                        ),
                       ),
                     );
                   }
@@ -102,38 +105,6 @@ class MovieDetailsScreen extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Expanded(
-                                          child: GridView.builder(
-                                            gridDelegate:
-                                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                              childAspectRatio: 0.2,
-                                              crossAxisSpacing: 5,
-                                              mainAxisSpacing: 5,
-                                              crossAxisCount: 2,
-                                            ),
-                                            itemBuilder: (context, index) {
-                                              Container(
-                                                width: 50,
-                                                height: 25,
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4),
-                                                    border: Border.all(
-                                                      color: AppColor.grayColor,
-                                                    )),
-                                                child: Center(
-                                                  child: Text(
-                                                    'Action',
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .titleSmall,
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ),
                                         const SizedBox(
                                           height: 8,
                                         ),
@@ -143,9 +114,11 @@ class MovieDetailsScreen extends StatelessWidget {
                                                   .width *
                                               0.58,
                                           child: Text(
-                                            detailsMovie.overview!
-                                                    .substring(0, 120) +
-                                                ' ...',
+                                            detailsMovie.overview!.length < 120
+                                                ? detailsMovie.overview!
+                                                : detailsMovie.overview!
+                                                        .substring(0, 120) +
+                                                    ' ...',
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .bodyMedium,

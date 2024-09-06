@@ -21,9 +21,12 @@ class RecommendedWidget extends StatelessWidget {
       child: BlocBuilder<RecommendedViewModel, RecommendedState>(
           builder: (context, state) {
         if (state is RecommendedLoadingState) {
-          return const Center(
-            child: CircularProgressIndicator(
-              color: AppColor.darkYellowColor,
+          return SizedBox(
+            height: height * 0.3,
+            child: const Center(
+              child: CircularProgressIndicator(
+                color: AppColor.darkYellowColor,
+              ),
             ),
           );
         }
