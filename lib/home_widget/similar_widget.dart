@@ -93,6 +93,8 @@ class SimilarWidget extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       CustomScreen(
+                                          coverImage:
+                                              "https://image.tmdb.org/t/p/w500${similarResults[index].backdropPath}",
                                           results: similarResults[index],
                                           image:
                                               "https://image.tmdb.org/t/p/w500${similarResults[index].posterPath}",
@@ -123,8 +125,7 @@ class SimilarWidget extends StatelessWidget {
                                                   Text(
                                                     similarResults[index]
                                                         .voteAverage
-                                                        .toString()
-                                                        .substring(0, 3),
+                                                        .toString(),
                                                     style: Theme.of(context)
                                                         .textTheme
                                                         .headlineSmall,
@@ -134,17 +135,11 @@ class SimilarWidget extends StatelessWidget {
                                               const Spacer(),
                                               Text(
                                                 similarResults[index]
-                                                            .originalTitle!
-                                                            .length >
-                                                        8
-                                                    ? similarResults[index]
-                                                        .originalTitle!
-                                                        .substring(0, 8)
-                                                    : similarResults[index]
-                                                        .originalTitle!,
+                                                    .originalTitle!,
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .headlineSmall,
+                                                overflow: TextOverflow.ellipsis,
                                               ),
                                               const Spacer(),
                                               Text(

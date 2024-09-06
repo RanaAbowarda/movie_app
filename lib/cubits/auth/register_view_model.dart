@@ -29,6 +29,7 @@ class RegisterViewModel extends ChangeNotifier {
 
         navigator.hideLoading();
         navigator.showSuccessMessage("Register Successfully.");
+        navigator.goHome();
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
           navigator.hideLoading();

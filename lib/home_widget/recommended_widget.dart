@@ -100,6 +100,8 @@ class RecommendedWidget extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       CustomScreen(
+                                          coverImage:
+                                              "https://image.tmdb.org/t/p/w500/${item.backdropPath ?? ""}",
                                           results: item,
                                           image:
                                               "https://image.tmdb.org/t/p/w500/${item.posterPath ?? ""}",
@@ -137,10 +139,11 @@ class RecommendedWidget extends StatelessWidget {
                                               ),
                                               const Spacer(),
                                               Text(
-                                                item.title!.substring(0, 8),
+                                                item.title!,
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .headlineSmall,
+                                                overflow: TextOverflow.ellipsis,
                                               ),
                                               const Spacer(),
                                               Text(
