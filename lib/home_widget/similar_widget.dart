@@ -90,6 +90,8 @@ class SimilarWidget extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       CustomScreen(
+                                          coverImage:
+                                              "https://image.tmdb.org/t/p/w500${similarResults[index].backdropPath}",
                                           results: similarResults[index],
                                           image:
                                               "https://image.tmdb.org/t/p/w500${similarResults[index].posterPath}",

@@ -47,7 +47,7 @@ class ItemOfWatchList extends StatelessWidget {
             child: Row(
               children: [
                 Container(
-                  height: heightOfScreen * 0.2,
+                  height: 90,
                   width: widthOfScreen * 0.34,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4),

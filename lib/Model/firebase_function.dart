@@ -37,8 +37,12 @@ class FirebaseFunction {
   }
 
   static Future<bool> isMovieAdd(String title) async {
-    var doc = await getMovieCollection().doc(title).get();
-    return doc.exists;
+    String userId = FirebaseAuth.instance.currentUser?.uid ?? "";
+    var querySnapshot = await getMovieCollection()
+        .where("title", isEqualTo: title)
+        .where("userId", isEqualTo: userId)
+        .get();
+    return querySnapshot.docs.isNotEmpty;
   }
 
   static CollectionReference<UserModel> getUserCollections() {

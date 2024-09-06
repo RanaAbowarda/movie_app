@@ -97,6 +97,8 @@ class RecommendedWidget extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       CustomScreen(
+                                          coverImage:
+                                              "https://image.tmdb.org/t/p/w500/${item.backdropPath ?? ""}",
                                           results: item,
                                           image:
                                               "https://image.tmdb.org/t/p/w500/${item.posterPath ?? ""}",

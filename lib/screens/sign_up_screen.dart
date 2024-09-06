@@ -152,7 +152,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                           backgroundColor: AppColor.yellowColor,
                         ),
                         child: const Text(
-                          "Login",
+                          "Sign Up",
                           style: TextStyle(
                             fontSize: 20,
                             color: AppColor.darkGrayColor,
@@ -213,5 +213,11 @@ class _SignUpScreenState extends State<SignUpScreen>
       message: message,
       posActionName: "Ok",
     );
+  }
+
+  @override
+  void goHome() {
+    Navigator.pushNamedAndRemoveUntil(
+        context, SignInScreen.routeName, (route) => false);
   }
 }

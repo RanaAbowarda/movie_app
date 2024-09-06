@@ -14,7 +14,10 @@ class CustomScreen extends StatefulWidget {
       this.heightMeasure,
       this.widthMeasure,
       this.results,
+      this.coverImage,
       this.isAdd = false});
+
+  String? coverImage;
   Results? results;
   double? widthMeasure;
   double? heightMeasure;
@@ -69,7 +72,7 @@ class _CustomScreenState extends State<CustomScreen> {
                                   FirebaseAuth.instance.currentUser?.uid ?? "",
                               title: widget.results!.title!,
                               originalTitle: widget.results!.originalTitle!,
-                              image: widget.image,
+                              image: widget.coverImage!,
                               releasedDate: widget.results!.releaseDate!);
                           FirebaseFunction.addMovie(movie);
                           setState(() {
