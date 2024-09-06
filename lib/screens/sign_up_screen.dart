@@ -46,9 +46,12 @@ class _SignUpScreenState extends State<SignUpScreen>
                   var resultList =
                       BlocProvider.of<PopularViewModel>(context).resultList;
                   if (state is PopularLoadingState) {
-                    return const Center(
-                      child: CircularProgressIndicator(
-                        color: AppColor.darkYellowColor,
+                    return SizedBox(
+                      height: 250,
+                      child: const Center(
+                        child: CircularProgressIndicator(
+                          color: AppColor.darkYellowColor,
+                        ),
                       ),
                     );
                   }

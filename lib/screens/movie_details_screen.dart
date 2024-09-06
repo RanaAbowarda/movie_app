@@ -115,9 +115,10 @@ class MovieDetailsScreen extends StatelessWidget {
                                                   .width *
                                               0.58,
                                           child: Text(
-                                            detailsMovie.overview!
-                                                    .substring(0, 120) +
-                                                ' ...',
+                                            detailsMovie.overview!.length < 120
+                                                ? '${detailsMovie.overview!}...'
+                                                : detailsMovie.overview!
+                                                    .substring(0, 120),
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .bodyMedium,
