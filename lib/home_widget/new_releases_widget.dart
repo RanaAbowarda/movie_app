@@ -21,9 +21,12 @@ class NewReleasesWidget extends StatelessWidget {
       child: BlocBuilder<NewReleasedViewModel, NewReleasedState>(
           builder: (context, state) {
         if (state is NewReleasedLoadingState) {
-          return const Center(
-            child: CircularProgressIndicator(
-              color: AppColor.darkYellowColor,
+          return SizedBox(
+            height: height * 0.3,
+            child: const Center(
+              child: CircularProgressIndicator(
+                color: AppColor.darkYellowColor,
+              ),
             ),
           );
         }

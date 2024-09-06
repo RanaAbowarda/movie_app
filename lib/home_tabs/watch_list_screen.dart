@@ -60,7 +60,11 @@ class _WatchListScreenState extends State<WatchListScreen> {
         stream: FirebaseFunction.getMovie(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
+            return Center(
+              child: const CircularProgressIndicator(
+                color: AppColor.yellowColor,
+              ),
+            );
           }
           if (snapshot.hasError) {
             return Center(
