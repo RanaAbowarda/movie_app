@@ -3,6 +3,7 @@ abstract class RegisterNavigator {
 
   void hideLoading() {}
 
+  void goHome() {}
   void showSuccessMessage(String message) {}
 
   void showErrorMessage(String message) {}

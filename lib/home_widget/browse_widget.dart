@@ -84,6 +84,8 @@ class BrowseWidget extends StatelessWidget {
                               );
                             },
                             child: CustomScreen(
+                                coverImage:
+                                    "https://image.tmdb.org/t/p/w500/${item.backdropPath!}",
                                 results: item,
                                 image:
                                     "https://image.tmdb.org/t/p/w500/${item.posterPath!}")),

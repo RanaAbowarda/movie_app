@@ -82,6 +82,8 @@ class NewReleasesWidget extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.only(right: 10),
                             child: CustomScreen(
+                              coverImage:
+                                  "https://image.tmdb.org/t/p/w500/${item.backdropPath!}",
                               results: item,
                               image:
                                   "https://image.tmdb.org/t/p/w500/${item.posterPath!}",
