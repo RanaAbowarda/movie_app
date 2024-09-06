@@ -23,9 +23,12 @@ class SimilarWidget extends StatelessWidget {
         final similarResults =
             BlocProvider.of<MoreLikeViewModel>(context).similarResultsList;
         if (state is MoreLikeLoadingState) {
-          return const Center(
-            child: CircularProgressIndicator(
-              color: AppColor.darkYellowColor,
+          return SizedBox(
+            height: height * 0.5,
+            child: const Center(
+              child: CircularProgressIndicator(
+                color: AppColor.darkYellowColor,
+              ),
             ),
           );
         }
