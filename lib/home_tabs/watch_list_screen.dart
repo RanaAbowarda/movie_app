@@ -45,8 +45,11 @@ class _WatchListScreenState extends State<WatchListScreen> {
                     ?.copyWith(color: AppColor.yellowColor)),
         actions: [
           IconButton(
-              onPressed: () {
+              onPressed: () async {
                 FirebaseAuth.instance.signOut();
+                final prefs = await SharedPreferences.getInstance();
+                await prefs.remove('userName');
+                await prefs.remove('userId');
                 Navigator.pushNamedAndRemoveUntil(
                     context, SignInScreen.routeName, (route) => false);
               },
