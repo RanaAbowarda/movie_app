@@ -86,11 +86,10 @@ class ItemOfWatchList extends StatelessWidget {
                       textAlign: TextAlign.left,
                     ),
                     Text(
-                      movie.originalTitle.length < 15
-                          ? movie.originalTitle
-                          : movie.originalTitle.substring(0, 15),
+                      movie.originalTitle,
                       style: Theme.of(context).textTheme.bodyMedium,
                       textAlign: TextAlign.left,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 )
