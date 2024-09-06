@@ -134,10 +134,11 @@ class RecommendedWidget extends StatelessWidget {
                                               ),
                                               const Spacer(),
                                               Text(
-                                                item.title!.substring(0, 8),
+                                                item.title!,
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .headlineSmall,
+                                                overflow: TextOverflow.ellipsis,
                                               ),
                                               const Spacer(),
                                               Text(

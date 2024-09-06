@@ -120,8 +120,7 @@ class SimilarWidget extends StatelessWidget {
                                                   Text(
                                                     similarResults[index]
                                                         .voteAverage
-                                                        .toString()
-                                                        .substring(0, 3),
+                                                        .toString(),
                                                     style: Theme.of(context)
                                                         .textTheme
                                                         .headlineSmall,
@@ -131,17 +130,11 @@ class SimilarWidget extends StatelessWidget {
                                               const Spacer(),
                                               Text(
                                                 similarResults[index]
-                                                            .originalTitle!
-                                                            .length >
-                                                        8
-                                                    ? similarResults[index]
-                                                        .originalTitle!
-                                                        .substring(0, 8)
-                                                    : similarResults[index]
-                                                        .originalTitle!,
+                                                    .originalTitle!,
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .headlineSmall,
+                                                overflow: TextOverflow.ellipsis,
                                               ),
                                               const Spacer(),
                                               Text(
